@@ -3,12 +3,13 @@ from tensorflow.keras.preprocessing.image import load_img, img_to_array
 import numpy as np
 from flask import Flask, request, render_template
 from werkzeug.utils import secure_filename
+from flask_cors import CORS
 
 
 import os, sys, glob, re
 
 app = Flask(__name__)
-
+CORS(app)
 model_path = "SoilNet_93_86.h5"
 
 SoilNet = load_model(model_path)
@@ -71,5 +72,6 @@ def predict():
 
 
 if __name__ == '__main__':
-    app.run(debug=True,threaded=False)
+    app.run(debug=True, threaded=False, port=5001)
+
     
